@@ -4,9 +4,10 @@ resource "aws_iam_role" "ci_role" {
   tags               = var.tags
 }
 
-resource "aws_iam_role_policy_attachment" "github_admin" {
+resource "aws_iam_role_policy_attachment" "role_policies" {
+  for_each   = toset(var.role_policies)
   role       = aws_iam_role.ci_role.name
-  policy_arn = "arn:aws:iam::aws:policy/AdministratorAccess"
+  policy_arn = each.value
 }
 
 data "aws_iam_policy_document" "allow_ci" {

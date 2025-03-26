@@ -4,6 +4,14 @@ variable "role_name" {
   default     = "GitHubActions"
 }
 
+variable "role_policies" {
+  description = "List Of IAM Policy ARNs To Attach To The CI Role"
+  type        = list(string)
+  default = [
+    "arn:aws:iam::aws:policy/AdministratorAccess"
+  ]
+}
+
 variable "github_url" {
   description = "The URL Of The Token Endpoint For Github"
   type        = string
